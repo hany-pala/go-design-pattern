@@ -1,48 +1,45 @@
 package main
 
-import (
-	"fmt"
-	"github.com/inspiration33/design/bridge"
-)
+import "github.com/inspiration33/design/adapter"
+
+// func main() {
+// 	hpPrinter := &bridge.Hp{}
+// 	epsonPrinter := &bridge.Epson{}
+
+// 	macComputer := &bridge.Mac{}
+
+// 	macComputer.SetPrinter(hpPrinter)
+// 	macComputer.Print()
+// 	fmt.Println()
+
+// 	macComputer.SetPrinter(epsonPrinter)
+// 	macComputer.Print()
+// 	fmt.Println()
+
+// 	winComputer := &bridge.Windows{}
+
+// 	winComputer.SetPrinter(hpPrinter)
+// 	winComputer.Print()
+// 	fmt.Println()
+
+// 	winComputer.SetPrinter(epsonPrinter)
+// 	winComputer.Print()
+// 	fmt.Println()
+// }
 
 func main() {
-	hpPrinter := &bridge.Hp{}
-	epsonPrinter := &bridge.Epson{}
+	client := &adapter.Client{}
+	mac := &adapter.Mac{}
 
-	macComputer := &bridge.Mac{}
+	client.InsertLightningConnectorIntoComputer(mac)
 
-	macComputer.SetPrinter(hpPrinter)
-	macComputer.Print()
-	fmt.Println()
+	windowsMachine := &adapter.Windows{}
+	windowsMachineAdapter := &adapter.WindowsAdapter{
+		WindowMachine: windowsMachine,
+	}
 
-	macComputer.SetPrinter(epsonPrinter)
-	macComputer.Print()
-	fmt.Println()
-
-	winComputer := &bridge.Windows{}
-
-	winComputer.SetPrinter(hpPrinter)
-	winComputer.Print()
-	fmt.Println()
-
-	winComputer.SetPrinter(epsonPrinter)
-	winComputer.Print()
-	fmt.Println()
+	client.InsertLightningConnectorIntoComputer(windowsMachineAdapter)
 }
-
-//func main() {
-//	client := &adapter.Client{}
-//	mac := &adapter.Mac{}
-//
-//	client.InsertLightningConnectorIntoComputer(mac)
-//
-//	windowsMachine := &adapter.Windows{}
-//	windowsMachineAdapter := &adapter.WindowsAdapter{
-//		WindowMachine: windowsMachine,
-//	}
-//
-//	client.InsertLightningConnectorIntoComputer(windowsMachineAdapter)
-//}
 
 //func main() {
 //	normalBuilder := builder.GetBuilder("normal")
