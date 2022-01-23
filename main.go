@@ -1,6 +1,27 @@
 package main
 
-import "github.com/inspiration33/design/adapter"
+import "github.com/inspiration33/design/composite"
+
+func main() {
+	file1 := &composite.File{Name: "File1"}
+	file2 := &composite.File{Name: "File2"}
+	file3 := &composite.File{Name: "File3"}
+	folder1 := &composite.Folder{
+		Name: "Folder1",
+	}
+
+	folder1.Add(file1)
+
+	folder2 := &composite.Folder{
+		Name: "Folder2",
+	}
+	folder2.Add(file2)
+	folder2.Add(file3)
+	folder2.Add(folder1)
+
+	folder2.Search("rose")
+
+}
 
 // func main() {
 // 	hpPrinter := &bridge.Hp{}
@@ -27,19 +48,19 @@ import "github.com/inspiration33/design/adapter"
 // 	fmt.Println()
 // }
 
-func main() {
-	client := &adapter.Client{}
-	mac := &adapter.Mac{}
+// func main() {
+// 	client := &adapter.Client{}
+// 	mac := &adapter.Mac{}
 
-	client.InsertLightningConnectorIntoComputer(mac)
+// 	client.InsertLightningConnectorIntoComputer(mac)
 
-	windowsMachine := &adapter.Windows{}
-	windowsMachineAdapter := &adapter.WindowsAdapter{
-		WindowMachine: windowsMachine,
-	}
+// 	windowsMachine := &adapter.Windows{}
+// 	windowsMachineAdapter := &adapter.WindowsAdapter{
+// 		WindowMachine: windowsMachine,
+// 	}
 
-	client.InsertLightningConnectorIntoComputer(windowsMachineAdapter)
-}
+// 	client.InsertLightningConnectorIntoComputer(windowsMachineAdapter)
+// }
 
 //func main() {
 //	normalBuilder := builder.GetBuilder("normal")
